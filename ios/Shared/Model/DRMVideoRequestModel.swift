@@ -45,16 +45,14 @@ extension DRMVideoRequestModel {
         guard let localFileLocation = userDefaults.value(forKey: stream.name) as? Data else { return nil }
         var bookmarkDataIsStale = false
         do {
-            guard let url = try URL(resolvingBookmarkData: localFileLocation,
-                                    bookmarkDataIsStale: &bookmarkDataIsStale) else {
-                                        fatalError("Failed to create URL from bookmark!")
-            }
+            let url = try URL(resolvingBookmarkData: localFileLocation,
+                                    bookmarkDataIsStale: &bookmarkDataIsStale)
             
             if bookmarkDataIsStale {
                 fatalError("Bookmark data is stale!")
             }
             
-            let urlAsset = AVURLAsset(url: url)
+            let urlAsset = AVURLAsset(url: url!)
             return urlAsset
         } catch {
             fatalError("Failed to create URL from bookmark with error: \(error)")
