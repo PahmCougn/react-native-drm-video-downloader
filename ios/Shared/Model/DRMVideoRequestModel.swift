@@ -52,7 +52,7 @@ extension DRMVideoRequestModel {
                 fatalError("Bookmark data is stale!")
             }
             
-            let urlAsset = AVURLAsset(url: url!)
+            let urlAsset = AVURLAsset(url: url)
             return urlAsset
         } catch {
             fatalError("Failed to create URL from bookmark with error: \(error)")
